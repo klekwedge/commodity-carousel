@@ -1,58 +1,48 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const ELEMENTS_AMOUNT_IN_SLIDE = 5;
-const BUTTON_DEBOUNCE_INTERVAL = 50;
-const DEFAULT_TRANSITION = `transform 0.6s ease`;
-
-const PLACING_POSITION_START = `start`;
-const PLACING_POSITION_END = `end`;
-
-const DIRECTION_RIGHT = -1;
-const DIRECTION_LEFT = 1;
 
 function App() {
   const sliderWrapper = useRef<HTMLDivElement>(null);
   const sliderList = useRef<HTMLUListElement>(null);
   const sliderItem = useRef<HTMLLIElement>(null);
 
-  const sliderStep = sliderItem.current?.offsetWidth || 100 * ELEMENTS_AMOUNT_IN_SLIDE;
-
-  const sliderDirection = DIRECTION_RIGHT;
-
-  const getTranslate = (shiftX = 0, shiftY = 0, shiftZ = 0) => `translate3d(${shiftX}px, ${shiftY}px, ${shiftZ}px)`;
-
-  const setTransform = (direction: number) => {
-    if (sliderList.current) {
-      sliderList.current.style.transform = getTranslate(direction * sliderStep);
-    }
-  };
+  const [current, setCurrent] = useState(0);
+  const [direction, setDirection] = useState(0);
 
   const next = () => {
-    // if (sliderDirection === DIRECTION_LEFT) {
-    //   sliderDirection = DIRECTION_RIGHT;
-    //   replaceElements(PLACING_POSITION_START);
-    // }
-
     if (sliderWrapper.current && sliderList.current) {
-      sliderWrapper.current.style.justifyContent = `flex-start`;
-      sliderList.current.style.justifyContent = `flex-start`;
-      setTransform(sliderDirection);
+      setDirection(-1);
+
+      if (current < 3) {
+        setCurrent(current + 1);
+      } else {
+        setCurrent(0);
+      }
     }
   };
 
   const prev = () => {
-    // if (sliderDirection === DIRECTION_RIGHT) {
-    //   sliderDirection = DIRECTION_LEFT;
-    //   replaceElements(PLACING_POSITION_END);
-    // }
-    if (sliderWrapper.current  && sliderList.current) {
-      sliderWrapper.current.style.justifyContent = `flex-end`;
-      sliderList.current.style.justifyContent = `flex-end`;
-      setTransform(sliderDirection);
+    if (sliderWrapper.current && sliderList.current) {
+      if (current !== 0) {
+        setDirection(-1);
+        setCurrent(current - 1);
+      } else {
+        setDirection(-1);
+        setCurrent(3);
+      }
     }
   };
+
+  useEffect(() => {
+    if (sliderList.current && sliderItem.current) {
+      const sliderStep = sliderItem.current.offsetWidth * ELEMENTS_AMOUNT_IN_SLIDE;
+      const shift = direction * sliderStep * current;
+      sliderList.current.style.transform = `translate(${shift}px)`;
+    }
+  }, [current]);
 
   return (
     <>
