@@ -6,7 +6,7 @@
   font-family: 'Muller';
 
   font-display: swap;
-  src: url('../fonts/muller-bold.woff2') format('woff2'), url('../fonts/muller-bold.woff') format('woff');
+  src: url('../public/fonts/muller-bold.woff2') format('woff2'), url('../public/fonts/muller-bold.woff') format('woff');
 }
 
 @font-face {
@@ -15,7 +15,7 @@
   font-family: 'Muller';
 
   font-display: swap;
-  src: url('../fonts/muller-regular.woff2') format('woff2'), url('../fonts/muller-regular.woff') format('woff');
+  src: url('../public/fonts/muller-regular.woff2') format('woff2'), url('../public/fonts/muller-regular.woff') format('woff');
 }
 
 @font-face {
@@ -24,7 +24,7 @@
   font-family: 'Muller';
 
   font-display: swap;
-  src: url('../fonts/muller-medium.woff2') format('woff2'), url('../fonts/muller-medium.woff') format('woff');
+  src: url('../public/fonts/muller-medium.woff2') format('woff2'), url('../public/fonts/muller-medium.woff') format('woff');
 }
 
 @font-face {
@@ -33,7 +33,7 @@
   font-family: 'Rouble';
 
   font-display: swap;
-  src: url('../fonts/rouble.woff2') format('woff2'), url('../fonts/rouble.woff') format('woff');
+  src: url('../public/fonts/rouble.woff2') format('woff2'), url('../public/fonts/rouble.woff') format('woff');
 }
 
 *,
